@@ -4,7 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: .github/actions/hello/action.yml
+      - uses: /.github/actions/hello/action.yml
         id: hello
         with:
           who-to-greet: World
