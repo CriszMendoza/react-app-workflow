@@ -13,7 +13,6 @@ jobs:
       - run: |
           echo $HELLO
       - name: "Create Issue"
-        if: ${{ failure() }}
         id: issue
         uses: "./.github/actions/issue"
         with:
