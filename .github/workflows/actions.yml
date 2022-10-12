@@ -4,10 +4,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: "./.github/actions/hello"
+      - uses: "./.github/actions/hello-docker"
         id: hello
         with:
-          who-to-greet: World
+          who-to-greet: "World!"
       - run: |
           echo 'Time: ${{ steps.hello.outputs.time }}'
       - run: |
