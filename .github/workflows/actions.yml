@@ -11,4 +11,15 @@ jobs:
       - run: |
           echo 'Time: ${{ steps.hello.outputs.time }}'
       - run: |
-          echo $HELLo
+          echo $HELLO
+      - name: "Create Issue"
+        if: ${{ failure() }}
+        id: issue
+        uses: "./.github/actions/issue"
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Title"
+          body: "Body"
+          assignees: "CriszMendoza"
+      - run: |
+          echo ${{ steps.issue.outputs.issue }}
