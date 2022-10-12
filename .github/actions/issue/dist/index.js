@@ -9696,25 +9696,27 @@ const github = __nccwpck_require__(5438);
 //      "assignees": ["${{ github.event.pull_request.user.login }}"]
 //      }'
 
-try {
-  const token = core.getInput("token");
-  const title = core.getInput("title");
-  const body = core.getInput("body");
-  const assignees = core.getInput("assignees").split(" ") || undefined;
+(async () => {
+  try {
+    const token = core.getInput("token");
+    const title = core.getInput("title");
+    const body = core.getInput("body");
+    const assignees = core.getInput("assignees").split(" ") || undefined;
 
-  const octokit = new github.getOctokit(token);
+    const octokit = new github.getOctokit(token);
 
-  const response = octokit.rest.issues.create({
-    ...github.context.repo,
-    title,
-    body,
-    assignees,
-  });
+    const response = await octokit.rest.issues.create({
+      ...github.context.repo,
+      title,
+      body,
+      assignees,
+    });
 
-  core.setOutput("issue", JSON.stringify(response.data));
-} catch (error) {
-  core.setFailed(error.message);
-}
+    core.setOutput("issue", JSON.stringify(response.data));
+  } catch (error) {
+    core.setFailed(error.message);
+  }
+})();
 
 })();
 
